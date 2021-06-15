@@ -16,6 +16,11 @@ describe('Url Shortener', () => {
       cy.get('form').should('be.visible')
         .get('input[name="title"]').should('be.empty').should('be.visible')
         .get('input[name="long_url"]').should('be.empty').should('be.visible')
-        .get('button').should('be.visible').should('contain', 'Shorten Please!').should('be.disabled')
+        .get('button').should('be.visible').should('contain', 'Shorten Please!')
+    })
+
+    it('should allow a user to type information in the input fields', () => {
+      cy.get('input[name="title"]').type('Title')
+        .get('input[name="long_url"]').type('https://images.unsplash.com/photo-1531898418865-480b7090470f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80')
     })
 })
