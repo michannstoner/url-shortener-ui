@@ -1,5 +1,6 @@
 import React from 'react';
 import './UrlContainer.css';
+import UrlCard from '../UrlCard/UrlCard'
 
 const UrlContainer = props => {
   const urlEls = props.urls.map(url => {
