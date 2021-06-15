@@ -10,7 +10,7 @@ class UrlForm extends Component {
     };
   }
 
-  handleNameChange = e => {
+  handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   }
 
@@ -31,7 +31,7 @@ class UrlForm extends Component {
           placeholder='Title...'
           name='title'
           value={this.state.title}
-          onChange={e => this.handleNameChange(e)}
+          onChange={e => this.handleChange(e)}
         />
 
         <input
@@ -39,7 +39,7 @@ class UrlForm extends Component {
           placeholder='URL to Shorten...'
           name='urlToShorten'
           value={this.state.urlToShorten}
-          onChange={e => this.handleNameChange(e)}
+          onChange={e => this.handleChange(e)}
         />
 
         <button onClick={e => this.handleSubmit(e)}>
