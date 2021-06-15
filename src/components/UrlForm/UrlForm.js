@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 
 class UrlForm extends Component {
-  constructor(props) {
+  constructor() {
     super();
-    this.props = props;
     this.state = {
       title: '',
       long_url: ''
@@ -47,7 +46,7 @@ class UrlForm extends Component {
           onChange={e => this.handleChange(e)}
         />
 
-        <button onClick={e => this.handleSubmit(e)}>
+        <button disabled={!this.state.title && !this.state.long_url} onClick={e => this.handleSubmit(e)}>
           Shorten Please!
         </button>
       </form>
