@@ -16,7 +16,7 @@ export class App extends Component {
   componentDidMount() {
     getUrls() 
       .then(data => this.setState( { urls: data.urls }))
-      .catch(error => this.setState({ error: 'Something went wrong, try again later!' }))
+      .catch(error => alert(error))
   }
 
   shortenUrl = urlToShorten => {
@@ -27,7 +27,7 @@ export class App extends Component {
     })
     .then(response => response.json())
     .then(url => this.setState({ urls: [...this.state.urls, url]}))
-    .catch(error => this.setState({ error: 'We\'re experiencing issues, try later!'}))
+    .catch(error => alert(error))
   }
 
   render() {
@@ -37,8 +37,6 @@ export class App extends Component {
           <h1>URL Shortener</h1>
           <UrlForm shortenUrl={this.shortenUrl}/>
         </header>
-        {this.state.error && <h2>{this.state.error}</h2>}
-        {!this.state.urls && !this.state.error && <p>No urls yet! Find some to shorten!</p>}
         <UrlContainer urls={this.state.urls}/>
       </main>
     );
