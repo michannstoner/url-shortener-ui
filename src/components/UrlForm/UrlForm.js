@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 
 class UrlForm extends Component {
-  constructor() {
+  constructor(props) {
     super();
+    this.props = props;
     this.state = {
       title: '',
       long_url: ''
@@ -19,8 +20,12 @@ class UrlForm extends Component {
       id: Date.now(),
       ...this.state
     }
-    this.props.shortenUrl(newUrl)
-    this.clearInputs();
+    if (!newUrl.title || !newUrl.long_url) {
+      alert('Please fill out both input fields')
+    } else {
+      this.props.shortenUrl(newUrl)
+      this.clearInputs();
+    }
   }
 
   clearInputs = () => {
@@ -46,7 +51,7 @@ class UrlForm extends Component {
           onChange={e => this.handleChange(e)}
         />
 
-        <button disabled={!this.state.title && !this.state.long_url} onClick={e => this.handleSubmit(e)}>
+        <button onClick={e => this.handleSubmit(e)}>
           Shorten Please!
         </button>
       </form>
