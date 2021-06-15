@@ -28,18 +28,29 @@ describe('Url Shortener', () => {
 
 describe('POST requests', () => {
   beforeEach(() => {
-    cy.intercept('http://localhost:3001/api/v1/urls', { fixture: 'test-data.json' })
-      .intercept({
+    cy.intercept({
         method: 'POST',
         url: 'http://localhost:3001/api/v1/urls'},
       {
         statusCode: 201,
         body: {
-          'id': 1234567, 
-          'long_url': 'https://images.unsplash.com/photo-1531898418865-480b7090470f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80', 
-          'short_url': 'http://localhost:3001/useshorturl/1', 'title': 'Title' 
-        } 
+          "id": 2,
+          "long_url": "https://images.unsplash.com/photo-1531898418865-480b7090470f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80",
+          "short_url": "http://localhost:3001/useshorturl/1",
+          "title": "Title"
+        }
       })
+    cy.intercept('http://localhost:3001/api/v1/urls', { fixture: 'test-data.json' })
       .visit('http://localhost:3000')
+  })
+
+  it('should display the new shortened URL when the form is submitted', () => {
+    cy.get('input[name="title"]').type('Title')
+      .get('input[name="long_url"]').type('https://images.unsplash.com/photo-1531898418865-480b7090470f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80')
+      .get('button').click()
+      cy.get('div').eq(2).should('be.visible')
+        .get('h3').should('contain', 'Title').should('be.visible')
+        .get('a').should('contain', 'http://localhost:3001/useshorturl/1').should('be.visible')
+        .get('p').should('contain', 'https://images.unsplash.com/photo-1531898418865-480b7090470f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80').should('be.visible')
   })
 })
