@@ -1,4 +1,4 @@
-describe('Url Shortener', () => {
+describe('URL Shortener', () => {
   beforeEach(() => {
     cy.intercept('http://localhost:3001/api/v1/urls', { fixture: 'test-data.json' })
       .visit('http://localhost:3000')
