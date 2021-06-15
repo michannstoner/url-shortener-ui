@@ -5,8 +5,8 @@ import UrlContainer from '../UrlContainer/UrlContainer';
 import UrlForm from '../UrlForm/UrlForm';
 
 export class App extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       urls: [],
       error: ''
@@ -31,13 +31,14 @@ export class App extends Component {
   }
 
   render() {
-    console.log(this.state.urls);
     return (
       <main className="App">
         <header>
           <h1>URL Shortener</h1>
           <UrlForm shortenUrl={this.shortenUrl}/>
         </header>
+        {this.state.error && <h2>{this.state.error}</h2>}
+        {!this.state.urls && !this.state.error && <p>No urls yet! Find some to shorten!</p>}
         <UrlContainer urls={this.state.urls}/>
       </main>
     );
