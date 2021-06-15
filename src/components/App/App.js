@@ -5,7 +5,7 @@ import UrlContainer from '../UrlContainer/UrlContainer';
 import UrlForm from '../UrlForm/UrlForm';
 
 export class App extends Component {
-  constructor() {
+  constructor(props) {
     super();
     this.state = {
       urls: [],
